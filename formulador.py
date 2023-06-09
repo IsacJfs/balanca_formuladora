@@ -31,29 +31,11 @@ class Formula:
         # A partir da quantidade selecionada, retorna a quantidade a ser produzida.
         match self._quantidade:
             case '1':
-                qtde = 200.0
-                nova_receita = {}
-                receita = self.escolha_receita().items()
-                for x, y in receita:
-                    novo_valor = y * qtde
-                    nova_receita[x] = novo_valor
-                return nova_receita
+                self.retorna_receita(200)
             case '2':
-                qtde = 400.0
-                nova_receita = {}
-                receita = self.escolha_receita().items()
-                for x, y in receita:
-                    novo_valor = y * qtde
-                    nova_receita[x] = novo_valor
-                return nova_receita
+                self.retorna_receita(400)
             case '3':
-                qtde = 500.0
-                nova_receita = {}
-                receita = self.escolha_receita().items()
-                for x, y in receita:
-                    novo_valor = y * qtde
-                    nova_receita[x] = novo_valor
-                return nova_receita
+                self.retorna_receita(500)
             case '4':
                 return self.calculo_livre()
             case _:
@@ -62,3 +44,13 @@ class Formula:
     def calculo_livre(self):
         # A partir da pesagem do primeiro ingrediente, retorna o valor dos outros.
         pass
+
+    def retorna_receita(self, quantidade):
+        nova_receita = {}
+        receita = self.escolha_receita().items()
+        for x, y in receita:
+            novo_valor = y * quantidade
+            nova_receita[x] = novo_valor
+        return nova_receita
+
+
