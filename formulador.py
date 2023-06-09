@@ -1,4 +1,5 @@
 from balanca import SimuladorBalanca
+
 """
 Programa criado para retornar os valores de uma formulação de ração para alimentação animal.
 """
