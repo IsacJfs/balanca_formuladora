@@ -1,4 +1,5 @@
 from formulador import Formula
+from balanca import SimuladorBalanca
 """
 Um simulador de menu de como a balança deveria funcionar em um hardware específico
 """
@@ -52,17 +53,21 @@ class SimulaMenu:
         |-------------------------------------|
         
         """)
-        return input("Digite 'Enter' para continuar.")
+        return input("Digite '1' para continuar.\n")
 
     def _exibe_pesagem(self):
         # Exibe o nome e a quantidade dos itens a serem pesados.
         receita = self._menu_receita()
         quantidade = self._menu_quantidade()
         formula = Formula(receita, quantidade)
-        formula.escolha_quantidade()
         formula.escolha_receita()
-        # valores_pesados = {}
-        return
+        valores_pesados = {}
+        for x, y in formula.escolha_quantidade().items():
+            print(f"\nPese {y} Kg de {x}")
+            valores_pesados[x] = float(SimuladorBalanca().novo_peso())
+            print(f"Valor pesado {valores_pesados[x]}\n")
+        print("O total pesado foi de: ", (sum(valores_pesados.values())), "kg")
+        return valores_pesados
 
 
 

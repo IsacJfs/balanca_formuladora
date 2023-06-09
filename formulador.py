@@ -46,9 +46,10 @@ class Formula:
     def _calculo_livre(self):
         # A partir da pesagem do primeiro ingrediente, retorna o valor dos outros.
         receita = self.escolha_receita()
+        print("Pese primeiro o núcleo mineral")
         primeiro = SimuladorBalanca().novo_peso()
         nova_quantidade = primeiro / receita.get('nuc_mineral')
-        return self._retorna_receita(nova_quantidade)
+        return self._retorna_receita_livre(nova_quantidade)
 
     def _retorna_receita(self, quantidade):
         nova_receita = {}
@@ -56,4 +57,13 @@ class Formula:
         for x, y in receita:
             novo_valor = y * quantidade
             nova_receita[x] = novo_valor
+        return nova_receita
+
+    def _retorna_receita_livre(self, quantidade):
+        nova_receita = {}
+        receita = self.escolha_receita().items()
+        for x, y in receita:
+            novo_valor = y * quantidade
+            nova_receita[x] = novo_valor
+        nova_receita.pop("nuc_mineral")
         return nova_receita
