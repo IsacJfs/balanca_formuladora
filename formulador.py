@@ -1,3 +1,4 @@
+from balanca import SimuladorBalanca
 """
 Programa criado para retornar os valores de uma formulação de ração para alimentação animal.
 """
@@ -37,13 +38,16 @@ class Formula:
             case '3' | 3:
                 return self._retorna_receita(500)
             case '4' | 4:
-                return self.calculo_livre()
+                return self._calculo_livre()
             case _:
                 raise ValueError('Opção Incorreta!')
 
-    def calculo_livre(self):
+    def _calculo_livre(self):
         # A partir da pesagem do primeiro ingrediente, retorna o valor dos outros.
-        pass
+        receita = self.escolha_receita()
+        primeiro = SimuladorBalanca().novo_peso()
+        nova_quantidade = primeiro / receita.get('nuc_mineral')
+        return self._retorna_receita(nova_quantidade)
 
     def _retorna_receita(self, quantidade):
         nova_receita = {}
@@ -52,5 +56,3 @@ class Formula:
             novo_valor = y * quantidade
             nova_receita[x] = novo_valor
         return nova_receita
-
-
